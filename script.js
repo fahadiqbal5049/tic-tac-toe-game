@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentPlayer = 'X';
     let gameActive = true;
     let vsComputer = false;
+    userTurn = true;
 
     function checkWinner() {
         const winPatterns = [
@@ -39,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function handleCellClick(e) {
         const index = cells.indexOf(e.target);
-        if (!gameActive || board[index]) return;
+        if (!gameActive || board[index] || !userTurn) return;
         board[index] = currentPlayer;
         e.target.textContent = currentPlayer;
         const result = checkWinner();
@@ -50,10 +51,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
         if (vsComputer && currentPlayer === 'O' && gameActive) {
-            setTimeout(computerMove, 2000);
+            userTurn = false;
+            setTimeout(computerMove, 1000);
         }
     }
-
     function computerMove() {
         const emptyCells = board.map((val, i) => val === '' ? i : null).filter(i => i !== null);
         if (emptyCells.length === 0) return;
@@ -67,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         currentPlayer = 'X';
+        userTurn = true;
     }
 
     function resetGame() {
@@ -74,6 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cells.forEach(cell => cell.textContent = '');
         currentPlayer = 'X';
         gameActive = true;
+        userTurn = true;
     }
 
     function setMode(humanVsComputer) {
