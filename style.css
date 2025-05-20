@@ -77,3 +77,13 @@
 .mode{
     margin-left: 400px;
 }
+
+.active {
+    background-color: #fdd72f;
+}
+
+.mode-1.active::before,
+.mode-2.active::before {
+    content: "✔ ";
+    color: #388e3c;
+}

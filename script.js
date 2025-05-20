@@ -79,6 +79,15 @@ document.addEventListener("DOMContentLoaded", () => {
     function setMode(humanVsComputer) {
         vsComputer = humanVsComputer;
         resetGame();
+
+        if (vsComputer){
+            mode2Btn.classList.add('active');
+            mode1Btn.classList.remove('active');
+        }
+        else{
+            mode1Btn.classList.add('active');
+            mode2Btn.classList.remove('active');
+        }
     }
 
     cells.forEach(cell => cell.addEventListener('click', handleCellClick));
